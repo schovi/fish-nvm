@@ -15,8 +15,10 @@ function __check_nvm --on-variable PWD -d 'Setup nvm on directory change'
 
       break
     else
-      if test -s .nvmrc
-        set -l current (cat .nvmrc)
+      set -l nvmrc "$cwd/.nvmrc"
+
+      if test -s $nvmrc
+          set -l current (cat $nvmrc)
 
         if test "$__nvm_current" != "$current"
           nvm use $current 1>/dev/null 2>&1 &
